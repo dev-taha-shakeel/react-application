@@ -4,8 +4,10 @@ import { createLogger } from 'redux-logger';
 
 import rootReducer from '../store/reducers/rootReducer';
 import { existInLocal, getFromLocal } from '../utils/storageUtils/cache';
-// import { saveState, loadState } from 'utils/storageUtils';
-// import * as userState from './reducers/userReducer';
+import {
+  restarauntListingInitialState,
+  restarauntDetailInitialState,
+} from '../store/reducers/initialState';
 // import * as tokenState from './reducers/tokenReducer';
 // import * as registrationState from './reducers/registrationReducer';
 
@@ -27,25 +29,19 @@ const enhancer = composeEnhancers(
 
 function checkAndRestoreFromLocal() {
   // Name should be same as those of the reducers
-  // let user = userState.initialState;
-  // let token = tokenState.initialState;
-  // let registration = registrationState.initialState;
-  // if (existInLocal('user')) {
-  //   user = Object.assign({}, user, getFromLocal('user', true, true));
-  // }
-  // if (existInLocal('adminToken')) {
-  //   token = Object.assign({}, token, getFromLocal('adminToken'));
-  // }
-  // if (existInLocal('token')) {
-  //   token = Object.assign({}, token, getFromLocal('token'));
-  // }
-  // if (existInLocal('register')) {
-  //   registration = Object.assign({}, registration, getFromLocal('register', true, true));
-  // }
+  let restarauntList = restarauntListingInitialState;
+  let restarauntDetail = restarauntDetailInitialState;
+
+  if (existInLocal('restarauntList')) {
+    restarauntList.restaraunts = getFromLocal('restarauntList');
+  }
+  if (existInLocal('restarauntDetail')) {
+    restarauntDetail.details = getFromLocal('restarauntDetail');
+  }
+
   return {
-    // user,
-    // token,
-    // registration,
+    restarauntList,
+    restarauntDetail,
   };
 }
 

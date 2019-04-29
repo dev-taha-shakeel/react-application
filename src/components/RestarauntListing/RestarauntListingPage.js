@@ -27,7 +27,12 @@ export default class RestarauntListingPage extends Component {
     updateRestaraunt(listOfRestaraunt);
   }
 
+  redirectToHomePage = (index) => {
+    this.props.history.push('details/' + index);
+  }
+
   renderCoverImageWithRating = (imgSrc, defaultRate, id, favourite) => {
+    // To-do: Refactor Rating component into a standalone component for resuability
     return (
       <div>
         <Row
@@ -82,6 +87,7 @@ export default class RestarauntListingPage extends Component {
             )}
             bordered={false}
             style={{ width: 300 }}
+            onClick={() => this.redirectToHomePage(index)}
           >
             <div>
               <span>
